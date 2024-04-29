@@ -76,9 +76,11 @@ moviePromise.then((data) => {
     const movieCardRating = document.createElement("span");
 
     movieCardTitle.setAttribute("class", "movie-collection__card__title");
+    movieCardTitle.classList.add("ubuntu-bold");
     movieCardTitle.textContent = `${elem["movieTitle"]}`;
 
     movieCardOverview.setAttribute("class", "movie-collection__card__overview");
+    movieCardOverview.classList.add("quicksand");
     movieCardOverview.textContent = `${elem["movieOverview"]}`;
 
     movieCardRating.setAttribute("class", "movie-collection__card__rating");
