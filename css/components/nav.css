@@ -3,5 +3,13 @@
     justify-content: center;
     align-items: center;
     height: 80px;
+    border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
+
+.gowun-dodum-regular {
+    font-family: "Gowun Dodum", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
