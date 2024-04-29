@@ -1,0 +1,26 @@
+.movie-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.movie-collection__card {
+    height: 700px;
+    width: 300px;
+    margin: 20px 100px;
+    border: 1px solid bisque;
+    border-radius: 15px;
+    background-color: bisque;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.movie-collection__card__title {
+    font-size: 24px;
+}
+
+.except {
+    display: none;
+}
+

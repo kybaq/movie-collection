@@ -1,0 +1,18 @@
+/* components */
+@import url("../css/components/card.css");
+@import url(../css/components/header.css);
+@import url("../css/components/nav.css");
+
+/* screens */
+@import url("../css/screens/main.css");
+
+/* variables */
+@import url("../css/variable.css");
+
+/* reset.css */
+@import url("../css/reset.css");
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
