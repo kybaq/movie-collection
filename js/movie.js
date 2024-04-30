@@ -1,4 +1,5 @@
 import config from "./apikey.js";
+import {} from "./search.js";
 // api key import
 
 const { API_KEY } = config;
@@ -20,15 +21,12 @@ async function getMoviePromise(url, options) {
   return list;
 }
 
+// 기존, Promise 객체를 명시적으로 return 하도록 작성했는데 fetch 자체가 Promise 객체를 return 함.
+// fetch 의 결과를 return 하도록 짧게 수정함.
 function getJson(url, options) {
-  return new Promise((resolve, reject) => {
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((err) => reject(err));
-  });
+  return fetch(url, options)
+    .then((response) => response.json())
+    .catch((err) => console.log(err));
 }
 
 const moviePromise = getMoviePromise(url, options);
@@ -57,6 +55,7 @@ moviePromise.then((data) => {
   const movies = getMovieList(data);
 
   console.log(movies);
+
   movies.forEach((elem) => {
     const movieCardCollection = document.querySelector(".movie-collection"); // card container 선택.
     const movieCard = document.createElement("article"); // movie card
@@ -86,46 +85,18 @@ moviePromise.then((data) => {
     movieCardRating.setAttribute("class", "movie-collection__card__rating");
     movieCardRating.textContent = `Rating: ${elem["movieRating"]}`;
 
-    movieCard.appendChild(movieCardImage); // Add figure
+    movieCard.appendChild(movieCardImage); // Add img
     movieCard.appendChild(movieCardTitle); // Add h4
     movieCard.appendChild(movieCardOverview); // Add p
     movieCard.appendChild(movieCardRating); // Add span
-    // movieCard.addEventListener("click", handleSubmit); // Add eventlistener
 
     movieCardCollection.appendChild(movieCard);
 
-    movieCard.addEventListener("click", handleClick, true);
+    movieCard.addEventListener("click", handleClick);
   });
 });
 
-const movieSearchForm = document.querySelector(".search-bar__form");
-const movieSearchInput = document.querySelector(".search-bar__input");
-// 검색 기능
-
-const handleSubmit = (evt) => {
-  evt.preventDefault();
-  const searchValue = movieSearchInput.value.toLowerCase();
-
-  printSearchResult(searchValue);
-};
-
-const printSearchResult = (searchValue) => {
-  const cardList = document.querySelectorAll(".movie-collection__card__title");
-  console.log(cardList);
-
-  cardList.forEach((elem) => {
-    if (elem.innerText.toLowerCase().includes(`${searchValue}`) !== true) {
-      elem.parentElement.classList.add("except");
-    } else if (searchValue === "") {
-      elem.parentElement.classList.remove("except");
-    } else {
-      elem.parentElement.classList.remove("except");
-    }
-  });
-};
-
 const handleClick = (evt) => {
-  evt.stopPropagation();
   const target = evt.target;
 
   if (target === document.querySelector(".movie-collection__card")) {
@@ -134,9 +105,3 @@ const handleClick = (evt) => {
     alert(`영화 id : ${target.parentElement.id}`);
   }
 };
-
-movieSearchForm.addEventListener("submit", handleSubmit);
-
-window.addEventListener("load", () => {
-  movieSearchInput.focus();
-});
