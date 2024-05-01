@@ -12,9 +12,9 @@
     <!-- 리뷰 섹션 -->
     <section id="review_container">
         <!-- 리뷰 작성 폼 -->
-        <form>
-            <input type="text" id="search" placeholder="작성자">
-            <input type="text" id="search" placeholder="비밀번호">
+        <form id="review_form">
+            <input type="text" id="id" placeholder="작성자">
+            <input type="text" id="" placeholder="비밀번호">
             <div id="review_create">
                 <input type="text" id="search" placeholder="영화에 대한 리뷰를 작성해주세요(50자 내)">
                 <button>작성</button>
@@ -23,10 +23,25 @@
         <!-- 리뷰를 보여주는 창 -->
         <div id="review">
             <!-- 리뷰 내용 -->
-            <div>리뷰 내용</div>
-            <div>리뷰 내용</div>
-            <div>리뷰 내용</div>
-            <div>리뷰 내용</div>
+            <form class="set">
+                <div class="username">작성자</div>
+                <div class="reviewtext">리뷰 내용</div>
+                <button class="modify">수정</button>
+                <button class="delete">삭제</button>
+            </form>
+            <form class="set">
+                <div class="username">작성자</div>
+                <div class="reviewtext">리뷰 내용</div>
+                <button class="modify">수정</button>
+                <button class="delete">삭제</button>
+            </form>
+            <form class="set">
+                <div class="username">작성자</div>
+                <div class="reviewtext">리뷰 내용</div>
+                <button class="modify">수정</button>
+                <button class="delete">삭제</button>
+            </form>
+            </div>
         </div>
     </section>
 </body>

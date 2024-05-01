@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(36, 36, 36);
+    background-color: rgb(30, 30, 30);
     color: whitesmoke;
 }
 
@@ -15,6 +15,17 @@ body {
     align-items: center;
 }
 
+#review_form > input{
+    width: 20%;
+    height: 20px;
+
+    margin: 1px;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: whitesmoke;
+}
+
 #review_create {
     display: flex;
     flex-direction: row;
@@ -25,11 +36,17 @@ body {
 
 #review_create >input {
     width: 80vw;
-    height: 5vh;
+    height: 10vh;
     margin: 10px;
+
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: whitesmoke;
 }
 
 #review {
+    width: 100%;
     display: flex;
     flex-direction: column;
 
@@ -37,4 +54,22 @@ body {
     align-items: center;
 
     margin: 20px;
+    
+}
+
+.set {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.set > .username,.reviewtext {
+    margin: 20px;
+}
+
+.modify, .delete {
+    height: 10%;
+    margin: 5px;
 }
