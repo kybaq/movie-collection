@@ -2,9 +2,11 @@
 @import url("../css/components/card.css");
 @import url("../css/components/header.css");
 @import url("../css/components/nav.css");
+@import url("../css/components/info.css");
 
 /* screens */
 @import url("../css/screens/main.css");
+@import url("../css/screens/review.css");
 
 /* variables */
 @import url("../css/variable.css");
@@ -21,4 +23,6 @@
 body {
     height: 100vh;
     width: 100vw;
+    background-color: rgba(0, 0, 0, 1)
+    /* background-color: #b8b8b8 */
 }

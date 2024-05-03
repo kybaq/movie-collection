@@ -1,0 +1,41 @@
+.movie-detail__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    z-index: 1;
+}
+
+.movie-detail__info::after {
+    height: 100%;
+    width: 100%;
+    content: "";
+    background-image: url("https://image.tmdb.org/t/p/w300//kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    /* opacity: 0.3; */
+    filter: blur(20px);
+}
+
+.movie-detail__info__box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.movie-detail__info__box:nth-child(1) {
+    align-items: center;
+}
+
+.movie-detail__info__title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.movie-detail__info__span_box {
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+

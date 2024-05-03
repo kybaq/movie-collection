@@ -3,8 +3,10 @@
     justify-content: center;
     align-items: center;
     height: 80px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    color: whitesmoke;
+    font-size: 17px;
 }
 
 .gowun-dodum-regular {
