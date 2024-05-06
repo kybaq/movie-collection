@@ -1,57 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>영화 상세정보</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/review.css" />
-  </head>
-  <body>
-    <main class="review">
-      <!-- 웹사이트의 내용을 전부 감싸며, 텍스트 본문 or 콘텐츠를 나타냄. 유일하게 하나만 있어야함.-->
 
-      <header class="detail-header nanum-gothic-regular">
-        <div class="">
-          <a href="/index.html" class="detail-header__home-btn"
-            ><i class="fa-solid fa-arrow-left"></i
-          ></a>
-        </div>
-        <!-- <div class="detail-header__title">영화 상세 정보</div> -->
-        <div class="detail-header__blank"></div>
-      </header>
-      <!-- 문서나 섹션의 머릿글 -->
-      <!-- <nav class="search-bar gowun-dodum-regular"></nav> -->
-      <!-- 웹의 메뉴나 탭, 탐색경로 등의 링크 제공 -->
-      <section class="movie-detail">
-        <article class="movie-detail__info">
-          <!-- 구체적 sementic tag 가 없는 영역, 콘텐츠 내의 특정 주제나 별도의 주제 -->
-          <!-- 게시물등 독립적인 컨텐츠를 하나 지정할때-->
-          <!-- 영상이나 이미지 콘텐츠 포함-->
-          <div class="movie-detail__info__box movie-detail__card1">
-            <img class="movie-detail__info__image" src="#" alt="" />
-          </div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>영화 상세정보</title>
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../css/review.css" />
+	<link rel="stylesheet" href="../css/reviews.css" />
+	<!-- ↓비밀번호 암호화 라이브러리 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+</head>
 
-          <div class="movie-detail__info__box movie-detail__card2">
-            <h4 class="movie-detail__info__title ubuntu-bold">
-              <!-- 제목 -->
-            </h4>
+<body>
+	<main class="review">
+		<!-- 웹사이트의 내용을 전부 감싸며, 텍스트 본문 or 콘텐츠를 나타냄. 유일하게 하나만 있어야함.-->
 
-            <div class="movie-detail__info__span_box">
-              <span class="movie-detail__info__rating ubuntu-medium">⭐⭐</span>
-              <span class="movie-detail__info__date">출시 일자</span>
-            </div>
+		<header class="detail-header nanum-gothic-regular">
+			<div class="">
+				<a href="/index.html" class="detail-header__home-btn"><i class="fa-solid fa-arrow-left"></i></a>
+			</div>
+			<!-- <div class="detail-header__title">영화 상세 정보</div> -->
+			<div class="detail-header__blank"></div>
+		</header>
+		<!-- 문서나 섹션의 머릿글 -->
+		<!-- <nav class="search-bar gowun-dodum-regular"></nav> -->
+		<!-- 웹의 메뉴나 탭, 탐색경로 등의 링크 제공 -->
+		<section class="movie-detail">
+			<article class="movie-detail__info">
+				<!-- 구체적 sementic tag 가 없는 영역, 콘텐츠 내의 특정 주제나 별도의 주제 -->
+				<!-- 게시물등 독립적인 컨텐츠를 하나 지정할때-->
+				<!-- 영상이나 이미지 콘텐츠 포함-->
+				<div class="movie-detail__info__box movie-detail__card1">
+					<img class="movie-detail__info__image" src="#" alt="" />
+				</div>
 
-            <p class="movie-detail__info__overview quicksand-medium">
-              <!-- 본문 -->
-            </p>
-          </div>
-        </article>
-    </main>
-    <script src="../js/review.js" type="module"></script>
-    <script
-      src="https://kit.fontawesome.com/933537d04a.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+				<div class="movie-detail__info__box movie-detail__card2">
+					<h4 class="movie-detail__info__title ubuntu-bold">
+						<!-- 제목 -->
+					</h4>
+
+					<div class="movie-detail__info__span_box">
+						<span class="movie-detail__info__rating ubuntu-medium">⭐⭐</span>
+						<span class="movie-detail__info__date">출시 일자</span>
+					</div>
+
+					<p class="movie-detail__info__overview quicksand-medium">
+						<!-- 본문 -->
+					</p>
+				</div>
+			</article>
+		</section>
+
+		<!-- 리뷰 작성 HTML -->
+		<div class="review-wrapper">
+			<section class="review-write-container">
+				<form class="review-submit">
+					<div class="review-login-input-box">
+						<div class="box">
+							<input id="username" class="usernameClass" name="username" type="text" placeholder="ID">
+						</div>
+						<div class="box">
+							<input id="password" class="passwordClass" name="password" type="password" placeholder="Password">
+						</div>
+					</div>
+					<p class="user-login-alert">ID와 Password를 입력해주세요.</p>
+					<p class="review-text-alert">리뷰 내용을 입력해주세요.</p>
+					<p class="user-password-alert">비밀번호가 다릅니다.</p>
+					<div class="review-write-input-box">
+						<textarea class="review-write-input" placeholder="리뷰를 입력해주세요!"></textarea>
+					</div>
+					<div class="review-btn-box">
+						<button class="review-btn">리뷰 작성</button>
+					</div>
+				</form>
+			</section>
+
+			<section class="review-container">
+				<ul class="review-box">
+					<!-- 리뷰 리스트 -->
+					<p class="review-empty">등록된 리뷰가 없습니다.</p>
+				</ul>
+			</section>
+
+			<!-- 삭제 모달창 -->
+			<div class="delete-modal-conteiner">
+				<span class="delete-modal-close">&times;</span>
+				<div class="delete-modal-input-box">
+					<h4><span class="delete-modal-h4"></span> 삭제</h4>
+					<div class="delete-modal-input">
+						<input id="password-delete-input" class="password-delete-input" type="password"
+							placeholder="Password 입력 후 삭제">
+					</div>
+					<p class="delete-user-info-not-alert">비밀번호가 일치하지 않습니다.</p>
+					<button class="delete-modal-btn">삭제</button>
+				</div>
+			</div>
+
+			<!-- 수정 모달창 -->
+			<div class="edit-modal-conteiner">
+				<span class="edit-modal-close">&times;</span>
+				<div class="edit-modal-input-box">
+					<h4><span class="edit-modal-h4"></span> 수정</h4>
+					<div class="edit-modal-input">
+						<input class="edit-input" type="text" placeholder="수정 할 내용 입력">
+					</div>
+					<div class="edit-modal-input">
+						<input class="edit-password-input" type="password" placeholder="Password 입력 후 수정">
+					</div>
+					<p class="edit-user-info-not-alert">비밀번호가 일치하지 않습니다.</p>
+					<button class="edit-modal-btn">수정</button>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="../js/review.js" type="module"></script>
+	<script src="../js/reviews.js" type="module"></script>
+	<script src="https://kit.fontawesome.com/933537d04a.js" crossorigin="anonymous"></script>
+
+</body>
+
 </html>
