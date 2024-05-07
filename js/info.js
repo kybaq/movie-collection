@@ -108,7 +108,14 @@ fetch(
       const id = element["id"];
 
       let moviePoster = document.createElement("img");
-      moviePoster.setAttribute("src", `https://image.tmdb.org/t/p/w400${img}`);
+      if (img === null) {
+        moviePoster.setAttribute("src", "../image/No_Image_Available.jpg");
+      } else {
+        moviePoster.setAttribute(
+          "src",
+          `https://image.tmdb.org/t/p/w400${img}`
+        );
+      }
       moviePoster.classList.add("movie-poster");
 
       const movieInfo = document.createElement("div");
@@ -116,14 +123,17 @@ fetch(
 
       const movieTitle = document.createElement("h3");
       movieTitle.classList.add("movie-title");
+      movieTitle.classList.add("ubuntu-bold");
       movieTitle.textContent = title;
 
       const movieOverview = document.createElement("p");
       movieOverview.classList.add("movie-overview");
+      movieOverview.classList.add("quicksand-medium");
       movieOverview.textContent = overview;
 
       const movieRating = document.createElement("p");
       movieRating.classList.add("movie-rating");
+      movieOverview.classList.add("quicksand-light");
       movieRating.textContent = `Rating: ${voteAverage}`;
 
       const movieCard = document.createElement("div");
@@ -141,4 +151,3 @@ fetch(
     });
   })
   .catch((err) => console.error(err));
-
