@@ -6,15 +6,31 @@ const editModalClose = document.querySelector(".edit-modal-close");
 const deleteModalBtn = document.querySelector(".delete-modal-btn");
 const userbox = document.querySelector(".user-name-btn-box");
 const reviewEmpty = document.querySelector(".review-empty");
+const reviewFilterEmpty = document.querySelector(".review-filter-empty");
 
+// 로컬에 리뷰 있으면 가져오기
 let reviews = localStorage.getItem("reviews")
   ? JSON.parse(localStorage.getItem("reviews"))
   : [];
 
-// 리뷰 없을 시, 표시
-reviews.length === 0
-  ? reviewEmpty.classList.add("open")
-  : reviewEmpty.classList.remove("open");
+// 로컬에서 선택한 영화 ID 가져오기
+const currentMovieId = localStorage.getItem("currentMovieId");
+
+// 댓글을 표시할 때 선택한 영화 ID와 댓글의 영화 ID를 비교하여 필터링
+const filteredMovieId = reviews.filter(
+  (review) => parseInt(review.movieid) === parseInt(currentMovieId)
+);
+
+// 영화 리뷰 유무 표시
+const reviewsFilter = () => {
+  if (
+    reviews.filter((review) => review.movieid === currentMovieId).length === 0
+  ) {
+    reviewFilterEmpty.classList.add("open");
+  } else {
+    reviewFilterEmpty.classList.remove("open");
+  }
+};
 
 let deleteUserTarget = [];
 let editUserTarget = [];
@@ -56,58 +72,20 @@ deleteModalBtn.addEventListener("click", () => {
     reviews = reviews.filter(
       (review) => review.id !== parseInt(targetDelete.id)
     ); // id가 같지 않는것만 필터링해서 삭제 후 reviews에 할당
+
     save(); // 저장
     targetDelete.remove();
     passwordDeleteInput.value = "";
     deleteAlertOpenClose("close");
     alert("삭제가 완료되었습니다!");
     modalOpenClose("close");
-    reviews.length === 0
-      ? reviewEmpty.classList.add("open")
-      : reviewEmpty.classList.remove("open");
+
+    // 삭제 후 필터링된 리뷰가 없는지 확인 후 경고창 표시
+    reviewsFilter();
   } else {
     deleteAlertOpenClose("open");
   }
 });
-
-// 리뷰 추가
-const addItem = (review) => {
-  if (review.reviewText !== "") {
-    const li = document.createElement("li");
-    const deleteBtn = document.createElement("button");
-    const editBtn = document.createElement("button");
-    li.classList.add("review-list");
-    deleteBtn.classList.add("delete-btn");
-    editBtn.classList.add("edit-btn");
-    deleteBtn.innerText = "삭제";
-    editBtn.innerText = "수정";
-
-    li.innerHTML = `
-			<div class="user-review-box">
-				<p class="user-name">${review.user}<span class="user-name-sub"> 님의 리뷰</span></p>
-				<p class="review-text">${review.reviewText}</p>
-			</div>
-			`;
-
-    li.append(deleteBtn);
-    li.append(editBtn);
-
-    // 새로운 리뷰의 위치를 결정하기 위해 이전 리뷰들과의 비교
-    // const existingReview = reviewBox.querySelector(`li[id="${review.id}"]`);
-    const existingReview = reviewBox.querySelector(".review-list"); //reviewBox안에 있는 li선택
-    if (existingReview) {
-      // 리뷰가 있으면, 새로운 리뷰 삽입(insertBefore 특정 위치 앞에 노드 삽입)
-      reviewBox.insertBefore(li, existingReview);
-    } else {
-      // 새로운 리뷰가 없는 경우 가장 앞에 추가
-      reviewBox.prepend(li); // 선택한 블록에 제일 첫번째로 추가
-    }
-    li.id = review.id; // li에 review.id값 저장.(HTML안에 저장한값은 문자열로 돼있으니 나중에 꺼낼때 숫자로 바꿔주기)
-
-    deleteBtn.addEventListener("click", deleteItem);
-    editBtn.addEventListener("click", editItem);
-  }
-};
 
 // 수정 버튼
 const editItem = (e) => {
@@ -164,6 +142,43 @@ editModalBtn.addEventListener("click", () => {
   }
 });
 
+// 리뷰 추가
+const addItem = (review) => {
+  if (review.reviewText !== "") {
+    const li = document.createElement("li");
+
+    li.classList.add("review-list");
+
+    li.innerHTML = `
+			<div class="user-review-box">
+				<p class="user-name">${review.user}<span class="user-name-sub"> 님의 리뷰</span></p>
+				<p class="review-text">${review.reviewText}</p>
+			</div>
+			<button class="delete-btn">삭제</button>
+			<button class="edit-btn">수정</button>
+			`;
+
+    // 새로운 리뷰의 위치를 결정하기 위해 이전 리뷰들과의 비교
+    // const existingReview = reviewBox.querySelector(`li[id="${review.id}"]`);
+    const existingReview = reviewBox.querySelector(".review-list"); //reviewBox안에 있는 li선택
+    if (existingReview) {
+      // 리뷰가 있으면, 새로운 리뷰 삽입(insertBefore : 특정 위치 앞에 노드 삽입)
+      reviewBox.insertBefore(li, existingReview);
+    } else {
+      // 새로운 리뷰가 없는 경우 가장 앞에 추가
+      reviewBox.prepend(li); // prepend : 선택한 블록에 제일 첫번째로 추가
+    }
+
+    li.id = review.id; // li에 review.id값 저장.(HTML안에 저장한값은 문자열로 돼있으니 나중에 꺼낼때 숫자로 바꿔주기)
+
+    const deleteBtn = document.querySelector(".delete-btn");
+    const editBtn = document.querySelector(".edit-btn");
+
+    deleteBtn.addEventListener("click", deleteItem);
+    editBtn.addEventListener("click", editItem);
+  }
+};
+
 const submitHandler = (e) => {
   e.preventDefault();
   const userName = document.querySelector("#username").value.trim();
@@ -192,7 +207,7 @@ const submitHandler = (e) => {
     reviewInput.value = "";
   }
 
-  // 같은 아이디가 있을때는, 비밀번호만 맞으면 리뷰작성
+  // 같은 아이디가 있을때는, 비밀번호만 맞으면 리뷰작성 가능
   for (let i = 0; i < reviews.length; i++) {
     if (
       userName === reviews[i].user &&
@@ -210,19 +225,19 @@ const submitHandler = (e) => {
     user: userName,
     userpass: sha256(userPassword),
     reviewText: inputValue,
+    movieid: currentMovieId,
   };
 
+  addItem(review);
   reviews.push(review);
   save();
 
-  reviews.length === 0
-    ? reviewEmpty.classList.add("open")
-    : reviewEmpty.classList.remove("open");
-
-  addItem(review);
-  alert("리뷰 등록이 완료되었습니다!");
   reviewInput.value = "";
   reviewInput.focus();
+  alert("리뷰 등록이 완료되었습니다!");
+
+  // 새 리뷰가 추가되면 필터링된 리뷰가 있는지 확인 후 경고창 표시 및 제거
+  reviewsFilter();
 };
 
 // 로컬저장소에서 데이터를 꺼내 화면에 출력
@@ -230,12 +245,19 @@ const drawReviewList = () => {
   // 꺼내올때는 파싱(parse)해야함(JS 배열 형태로 가져옴)
   const userReviews = JSON.parse(localStorage.getItem("reviews"));
 
+  // userReviews있으면 화면에 보여주기
   if (userReviews) {
     userReviews.forEach((review) => {
-      addItem(review);
+      // 클릭한 현재 영화 id랑 같은 댓글만 화면에 출력
+      if (review.movieid === currentMovieId) {
+        addItem(review); // 화면에 출력
+      }
     });
 
     reviews = userReviews;
+
+    // 필터링된 리뷰가 없는 경우 경고창 표시
+    reviewsFilter();
   }
 };
 

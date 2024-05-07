@@ -191,11 +191,13 @@
 	/* overflow-wrap:break-word; */
 }
 
-.review-empty {
+.review-filter-empty {
 	display: none;
 }
-.review-empty.open {
-	margin-top: 10px;
+
+.review-filter-empty.open {
+	margin-top: 30px;
+	font-size: 18px;
 	display: block;
 }
 /* ======================================== */
