@@ -54,7 +54,6 @@ movieDetailOverview.textContent = movieOverviewText;
 const ID = window.sessionStorage.getItem("id");
 
 import config from "./apikey.js";
-import {} from "./search.js";
 // api key import
 
 const { API_KEY } = config;
