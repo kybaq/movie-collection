@@ -102,7 +102,7 @@ fetch(
 
     movieData2.forEach((element) => {
       const img = element["poster_path"];
-      const title = element["original_title"];
+      const title = element["title"];
       const overview = element["overview"];
       const voteAverage = element["vote_average"];
       const id = element["id"];
