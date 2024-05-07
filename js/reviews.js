@@ -151,7 +151,8 @@ const addItem = (review) => {
 
     li.innerHTML = `
 			<div class="user-review-box">
-				<p class="user-name"><span class="user-name-sub"></span>${review.user}</p>
+			<span class="user-name-sub">${timeForToday(review.time)}</span>
+				<p class="user-name">${review.user}</p>
 				<p class="review-text">${review.reviewText}</p>
 			</div>
 			<button class="delete-btn">Delete</button>
@@ -219,6 +220,8 @@ const submitHandler = (e) => {
       userPasswordAlert.classList.remove("open");
     }
   }
+  // 현재 날짜 및 시간 할당
+  const currTime = currentTime();
 
   const review = {
     id: Date.now(),
@@ -226,6 +229,7 @@ const submitHandler = (e) => {
     userpass: sha256(userPassword),
     reviewText: inputValue,
     movieid: currentMovieId,
+    time: currTime,
   };
 
   addItem(review);
@@ -316,6 +320,51 @@ const editModalOpenClose = (edit) => {
   if (edit === "close") {
     editModalConteiner.classList.remove("open");
   }
+};
+
+// 현재 날짜 및 시간
+const currentTime = () => {
+  const today = new Date();
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1; // 월
+  let date = today.getDate(); // 날짜
+  let day = today.getDay(); // 요일
+
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes(); // 분
+  let seconds = today.getSeconds(); // 초
+  let milliseconds = today.getMilliseconds(); // 밀리초
+
+  let ymd = year + "-" + month + "-" + date;
+  let hms = hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
+
+  return `${ymd} ${hms}`;
+};
+
+// 시간(몇 분 전)
+const timeForToday = (value) => {
+  const today = new Date();
+  const timeValue = new Date(value);
+
+  const betweenTime = Math.floor(
+    (today.getTime() - timeValue.getTime()) / 1000 / 60
+  );
+  if (betweenTime < 1) return "Just now";
+  if (betweenTime < 60) {
+    return `${betweenTime}minute ago`;
+  }
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `${betweenTimeHour}hour ago`;
+  }
+
+  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}day ago`;
+  }
+
+  return `${Math.floor(betweenTimeDay / 365)}year ago`;
 };
 
 // 필터링된 리뷰가 없는 경우 리뷰없음 표시
