@@ -6,11 +6,14 @@
     <title>영화 상세정보</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/review.css" />
+    <link rel="stylesheet" href="../css/reviews.css" />
+    <!-- ↓비밀번호 암호화 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   </head>
+
   <body>
     <main class="review">
       <!-- 웹사이트의 내용을 전부 감싸며, 텍스트 본문 or 콘텐츠를 나타냄. 유일하게 하나만 있어야함.-->
-
       <header class="detail-header nanum-gothic-regular">
         <div class="">
           <a href="../index.html" class="detail-header__home-btn"
@@ -39,7 +42,7 @@
 
             <div class="movie-detail__info__span_box">
               <span class="movie-detail__info__rating ubuntu-medium"></span>
-              <span class="movie-detail__info__date ubuntu-medium"></span>
+              <span class="movie-detail__info__date"></span>
             </div>
 
             <p class="movie-detail__info__overview quicksand-medium">
@@ -47,11 +50,107 @@
             </p>
           </div>
         </article>
+      </section>
+
+      <!-- 리뷰 작성 HTML -->
+      <div class="review-wrapper">
+        <section class="review-write-container">
+          <form class="review-submit">
+            <div class="review-login-input-box">
+              <div class="box">
+                <input
+                  id="username"
+                  class="usernameClass"
+                  name="username"
+                  type="text"
+                  placeholder="ID"
+                />
+              </div>
+              <div class="box">
+                <input
+                  id="password"
+                  class="passwordClass"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+            <p class="user-login-alert">ID와 Password를 입력해주세요.</p>
+            <p class="review-text-alert">리뷰 내용을 입력해주세요.</p>
+            <p class="user-password-alert">비밀번호가 다릅니다.</p>
+            <div class="review-write-input-box">
+              <textarea
+                class="review-write-input"
+                placeholder="리뷰를 입력해주세요!"
+              ></textarea>
+            </div>
+            <div class="review-btn-box">
+              <button class="review-btn">리뷰 작성</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="review-container">
+          <ul class="review-box">
+            <!-- 리뷰 리스트 -->
+            <p class="review-filter-empty">등록된 리뷰가 없습니다.</p>
+          </ul>
+        </section>
+
+        <!-- 삭제 모달창 -->
+        <div class="delete-modal-conteiner">
+          <span class="delete-modal-close">&times;</span>
+          <div class="delete-modal-input-box">
+            <h4><span class="delete-modal-h4"></span> 삭제</h4>
+            <div class="delete-modal-input">
+              <input
+                id="password-delete-input"
+                class="password-delete-input"
+                type="password"
+                placeholder="Password 입력 후 삭제"
+              />
+            </div>
+            <p class="delete-user-info-not-alert">
+              비밀번호가 일치하지 않습니다.
+            </p>
+            <button class="delete-modal-btn">삭제</button>
+          </div>
+        </div>
+
+        <!-- 수정 모달창 -->
+        <div class="edit-modal-conteiner">
+          <span class="edit-modal-close">&times;</span>
+          <div class="edit-modal-input-box">
+            <h4><span class="edit-modal-h4"></span> 수정</h4>
+            <div class="edit-modal-input">
+              <input
+                class="edit-input"
+                type="text"
+                placeholder="수정 할 내용 입력"
+              />
+            </div>
+            <div class="edit-modal-input">
+              <input
+                class="edit-password-input"
+                type="password"
+                placeholder="Password 입력 후 수정"
+              />
+            </div>
+            <p class="edit-user-info-not-alert">
+              비밀번호가 일치하지 않습니다.
+            </p>
+            <button class="edit-modal-btn">수정</button>
+          </div>
+        </div>
+      </div>
+      <section id="recommend_movies"></section>
+      <script src="../js/reviews.js" type="module"></script>
+      <script src="../js/info.js" type="module"></script>
+      <script
+        src="https://kit.fontawesome.com/933537d04a.js"
+        crossorigin="anonymous"
+      ></script>
     </main>
-    <script src="../js/info.js" type="module"></script>
-    <script
-      src="https://kit.fontawesome.com/933537d04a.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
