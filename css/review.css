@@ -114,3 +114,10 @@ body {
     top: 5px;
     margin-top: 5px;
   } */
+
+#recommend_movies {
+    border-radius: 15px;
+    box-shadow : 3px 3px 5px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 15px;
+}
