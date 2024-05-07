@@ -77,7 +77,7 @@ deleteModalBtn.addEventListener("click", () => {
     targetDelete.remove();
     passwordDeleteInput.value = "";
     deleteAlertOpenClose("close");
-    alert("삭제가 완료되었습니다!");
+    alert("Deletion completed!");
     modalOpenClose("close");
 
     // 삭제 후 필터링된 리뷰가 없는지 확인 후 경고창 표시
@@ -137,7 +137,7 @@ editModalBtn.addEventListener("click", () => {
     }
 
     editPasswordInput.value = "";
-    alert("수정이 완료되었습니다!");
+    alert("Editing completed!");
     editModalOpenClose("close");
   }
 });
@@ -151,11 +151,11 @@ const addItem = (review) => {
 
     li.innerHTML = `
 			<div class="user-review-box">
-				<p class="user-name">${review.user}<span class="user-name-sub"> 님의 리뷰</span></p>
+				<p class="user-name"><span class="user-name-sub"></span>${review.user}</p>
 				<p class="review-text">${review.reviewText}</p>
 			</div>
-			<button class="delete-btn">삭제</button>
-			<button class="edit-btn">수정</button>
+			<button class="delete-btn">Delete</button>
+			<button class="edit-btn">Edit</button>
 			`;
 
     // 새로운 리뷰의 위치를 결정하기 위해 이전 리뷰들과의 비교
@@ -234,7 +234,7 @@ const submitHandler = (e) => {
 
   reviewInput.value = "";
   reviewInput.focus();
-  alert("리뷰 등록이 완료되었습니다!");
+  alert("Review completed!");
 
   // 새 리뷰가 추가되면 필터링된 리뷰가 있는지 확인 후 경고창 표시 및 제거
   reviewsFilter();
@@ -255,9 +255,6 @@ const drawReviewList = () => {
     });
 
     reviews = userReviews;
-
-    // 필터링된 리뷰가 없는 경우 경고창 표시
-    reviewsFilter();
   }
 };
 
@@ -321,6 +318,10 @@ const editModalOpenClose = (edit) => {
   }
 };
 
+// 필터링된 리뷰가 없는 경우 리뷰없음 표시
+reviewsFilter();
+
+// 리뷰 출력
 drawReviewList();
 
 formSubmit.addEventListener("submit", submitHandler);
