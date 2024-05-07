@@ -1,0 +1,27 @@
+.movie-detail__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    z-index: 1;
+}
+
+.movie-detail__info__box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.movie-detail__info__box:nth-child(1) {
+    align-items: center;
+}
+
+.movie-detail__info__title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.movie-detail__info__span_box {
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+

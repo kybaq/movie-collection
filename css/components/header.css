@@ -1,9 +1,11 @@
 .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100px;
     font-size: 40px;
+    color: black;
+    margin-left: 50px;
 }
 
 .nanum-gothic-regular {
@@ -11,3 +13,30 @@
     font-weight: 700;
     font-style: normal;
   }
+
+.detail-header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    color: white;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.detail-header > div {
+    width: 33%;
+}
+
+.detail-header > div:nth-child(2) {
+    text-align: center;
+}
+
+.detail-header__home-btn {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    /* margin-top: 30px;
+    margin-left: 30px; */
+}
+

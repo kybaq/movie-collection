@@ -4,7 +4,7 @@ import {} from "./search.js";
 
 const { API_KEY } = config;
 const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`;
-const imgUrl = `https://image.tmdb.org/t/p/w300/`;
+const imgUrl = `https://image.tmdb.org/t/p/w300`;
 
 const options = {
   method: "GET",
@@ -15,7 +15,7 @@ const options = {
 };
 
 // Promise 객체를 모두 불러와 변수에 저장해서 사용하고 싶다.
-async function getMoviePromise(url, options) {
+export async function getMoviePromise(url, options) {
   const list = await getJson(url, options);
 
   return list;
@@ -36,15 +36,17 @@ moviePromise.then((data) => {
   const getMovieList = (data) => {
     const movieList = new Array();
 
-    const topMoives = data["results"];
+    const topMovies = data["results"];
 
-    topMoives.forEach((elem) => {
+    topMovies.forEach((elem) => {
       let movieInfo = {
         movieTitle: `${elem["title"]}`,
         moviePoster: `${imgUrl}${elem["poster_path"]}}`,
+        movieBackdrop: `${imgUrl}${elem["backdrop_path"]}}`, // backdrop_path와 release_date 를 넘겨주기 위해 display none 으로 설정하고 넘겨주기로 함
         movieOverview: `${elem["overview"]}`,
         movieRating: `${elem["vote_average"]}`,
         movieID: `${elem["id"]}`, // movie-collection__card 만들 때, id 추가해서 넣어주기
+        movieDate: `${elem["release_date"]}`, // review.html 의 .movie-detail__info__date 에서 사용.
       };
 
       movieList.push(movieInfo);
@@ -53,8 +55,6 @@ moviePromise.then((data) => {
   };
   // 이제야 필요한 5가지 정보를 편하게 객체로 사용할 수 있게됨.
   const movies = getMovieList(data);
-
-  console.log(movies);
 
   movies.forEach((elem) => {
     const movieCardCollection = document.querySelector(".movie-collection"); // card container 선택.
@@ -79,29 +79,84 @@ moviePromise.then((data) => {
     movieCardTitle.textContent = `${elem["movieTitle"]}`;
 
     movieCardOverview.setAttribute("class", "movie-collection__card__overview");
-    movieCardOverview.classList.add("quicksand");
+    // movieCardOverview.classList.add("quicksand");
+    movieCardOverview.classList.add("except");
     movieCardOverview.textContent = `${elem["movieOverview"]}`;
 
-    movieCardRating.setAttribute("class", "movie-collection__card__rating");
+    // movieCardRating.setAttribute("class", "movie-collection__card__rating");
+    movieCardRating.setAttribute("class", "except");
+    movieCardRating.classList.add("ubuntu-medium");
     movieCardRating.textContent = `Rating: ${elem["movieRating"]}`;
+    movieCardRating.innerHTML += "<br>";
+
+    const movieID = document.createElement("id");
+    movieID.textContent = `${elem["movieID"]}`;
+    movieID.setAttribute("class", "except");
 
     movieCard.appendChild(movieCardImage); // Add img
     movieCard.appendChild(movieCardTitle); // Add h4
     movieCard.appendChild(movieCardOverview); // Add p
     movieCard.appendChild(movieCardRating); // Add span
+    movieCard.appendChild(movieID); // Add ID
+
+    const movieDetailAnchor = document.createElement("a"); // 상세페이지 링크 삽입
+    movieDetailAnchor.textContent = "More Information";
+    movieDetailAnchor.setAttribute("href", "./template/review.html");
+    movieDetailAnchor.setAttribute("class", "movie-detail__info__review");
+    movieDetailAnchor.classList.add("gowun-dodum-regular");
+
+    movieCard.appendChild(movieDetailAnchor);
+
+    const movieBackDropSaver = document.createElement("backdrop"); // Backdrop 링크를 전달하기 위한 방법
+    movieBackDropSaver.textContent = `${elem["movieBackdrop"]}`;
+    movieBackDropSaver.setAttribute("class", "except"); // 보이지 않도록 설정
+
+    movieCard.appendChild(movieBackDropSaver);
+
+    const movieRelaseDate = document.createElement("date"); // 출시일자 전달하기 위한 방법
+    movieRelaseDate.textContent = `${elem["movieDate"]}`;
+    movieRelaseDate.setAttribute("class", "except"); // 보이지 않도록 설정
+
+    movieCard.appendChild(movieRelaseDate);
 
     movieCardCollection.appendChild(movieCard);
 
-    movieCard.addEventListener("click", handleClick);
+    movieDetailAnchor.addEventListener("click", handleClick);
+    // movieCard.addEventListener("click", handleClick);
   });
 });
 
+// const handleClick = (evt) => {
+//   const target = evt.target;
+
+//   if (target === document.querySelector(".movie-collection__card")) {
+//     console.dir(target);
+//   } else {
+//     console.dir(target.parentElement);
+//   }
+// };
+
+// const movieAnchor = document.querySelectorAll(".movie-detail__info__review");
+
+// localstorage 통해서 저장.
 const handleClick = (evt) => {
   const target = evt.target;
+  const targetId = evt.target.parentElement.id;
 
-  if (target === document.querySelector(".movie-collection__card")) {
-    alert(`영화 id : ${target.id}`);
-  } else {
-    alert(`영화 id : ${target.parentElement.id}`);
-  }
+  const cardData = target.parentElement.childNodes;
+  console.dir(cardData);
+
+  localStorage.setItem("currentMovieId", targetId); // id값 로컬저장
+
+  cardData.forEach((elem) => {
+    window.sessionStorage.setItem(
+      elem.localName,
+      elem.textContent ? elem.textContent : elem.src
+    );
+  });
 };
+
+// (poster) -> img : src
+// (title) -> h2 : textContent
+// (overview) -> p : textContent
+// (rating) -> span : textContent

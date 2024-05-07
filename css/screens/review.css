@@ -1,0 +1,29 @@
+
+.movie-detail__card1 {
+    height: 450px;
+    width: 300px;
+    margin: 20px 20px;
+    border-radius: 15px;
+    box-shadow : 3px 3px 5px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 15px;
+}
+
+.movie-detail__card2 {
+    height: 450px;
+    width: 480px;
+    margin: 20px 20px;
+    border-radius: 15px;
+    box-shadow : 3px 3px 5px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 15px;
+}
+
+.movie-detail__info__image {
+    border-radius: 10px;
+}
+
+.movie-detail__info__overview {
+    line-height: 1.3em;
+}
+
