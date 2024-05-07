@@ -6,7 +6,7 @@
 }
 
 .movie-collection__card {
-    height: 730px;
+    height: 530px;
     width: 300px;
     margin: 20px 100px;
     border-radius: 15px;
@@ -36,16 +36,20 @@
 .movie-collection__card__title {
     font-size: 24px;
     margin: 5px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }
 
-.movie-collection__card__overview {
+/* .movie-collection__card__overview {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 9;
     overflow: hidden;
     margin: 8px 0px;
     line-height: 1.1em;
-}
+} */
 
 .movie-detail__info__review {
     line-height: 2em;

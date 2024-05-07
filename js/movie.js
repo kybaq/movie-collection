@@ -77,20 +77,21 @@ moviePromise.then((data) => {
     movieCardTitle.setAttribute("class", "movie-collection__card__title");
     movieCardTitle.classList.add("ubuntu-bold");
     movieCardTitle.textContent = `${elem["movieTitle"]}`;
-    
 
     movieCardOverview.setAttribute("class", "movie-collection__card__overview");
-    movieCardOverview.classList.add("quicksand");
+    // movieCardOverview.classList.add("quicksand");
+    movieCardOverview.classList.add("except");
     movieCardOverview.textContent = `${elem["movieOverview"]}`;
-    movieCardRating.setAttribute("class", "movie-collection__card__rating");
+
+    // movieCardRating.setAttribute("class", "movie-collection__card__rating");
+    movieCardRating.setAttribute("class", "except");
     movieCardRating.classList.add("ubuntu-medium");
     movieCardRating.textContent = `Rating: ${elem["movieRating"]}`;
     movieCardRating.innerHTML += "<br>";
 
     const movieID = document.createElement("id");
     movieID.textContent = `${elem["movieID"]}`;
-    movieID.setAttribute("style", "display: none");
-
+    movieID.setAttribute("class", "except");
 
     movieCard.appendChild(movieCardImage); // Add img
     movieCard.appendChild(movieCardTitle); // Add h4
