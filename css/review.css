@@ -116,35 +116,46 @@ body {
     margin-top: 5px;
   } */
 
+.section-title {
+  color: white;
+  text-align: center;
+  padding-right: 655px;
+  font-size: 32px;
+}
+
 #recommend_movies {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .movie-card {
   display: flex;
   gap: 50px;
   height: 300px;
-  width: auto;
+  width: 857px;
   margin: 20px 100px;
   border-radius: 15px;
   box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.1);
   background-color: white;
-  padding: 20px;
-  cursor: pointer;
+  padding: 15px;
+}
+
+.movie-poster {
+  width: 200px;
 }
 
 .movie-title {
   font-size: 30px;
   margin: 5px 0px;
   margin-bottom: 50px;
-  border-bottom: solid;
+  padding-bottom: 10px;
+  border-bottom: 2px solid black;
 }
 
 .movie-overview {
-  margin-bottom: 100px;
-  font-size: 20px;
+  margin-bottom: 30px;
+  font-size: 19px;
 }
