@@ -4,7 +4,7 @@ import {} from "./search.js";
 
 const { API_KEY } = config;
 const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`;
-const imgUrl = `https://image.tmdb.org/t/p/w300/`;
+const imgUrl = `https://image.tmdb.org/t/p/w300`;
 
 const options = {
   method: "GET",
@@ -42,7 +42,7 @@ moviePromise.then((data) => {
       let movieInfo = {
         movieTitle: `${elem["title"]}`,
         moviePoster: `${imgUrl}${elem["poster_path"]}}`,
-        movieBackdrop: `${imgUrl}${elem["backdrop_path"]}}`,
+        movieBackdrop: `${imgUrl}${elem["backdrop_path"]}}`, // backdrop_path와 release_date 를 넘겨주기 위해 display none 으로 설정하고 넘겨주기로 함
         movieOverview: `${elem["overview"]}`,
         movieRating: `${elem["vote_average"]}`,
         movieID: `${elem["id"]}`, // movie-collection__card 만들 때, id 추가해서 넣어주기
@@ -50,8 +50,6 @@ moviePromise.then((data) => {
       };
 
       movieList.push(movieInfo);
-
-      console.log(movieList[0].movieBackdrop);
     });
     return movieList;
   };
@@ -83,7 +81,6 @@ moviePromise.then((data) => {
     movieCardOverview.setAttribute("class", "movie-collection__card__overview");
     movieCardOverview.classList.add("quicksand");
     movieCardOverview.textContent = `${elem["movieOverview"]}`;
-
     movieCardRating.setAttribute("class", "movie-collection__card__rating");
     movieCardRating.classList.add("ubuntu-medium");
     movieCardRating.textContent = `Rating: ${elem["movieRating"]}`;
@@ -101,6 +98,18 @@ moviePromise.then((data) => {
     movieDetailAnchor.classList.add("gowun-dodum-regular");
 
     movieCard.appendChild(movieDetailAnchor);
+
+    const movieBackDropSaver = document.createElement("backdrop"); // Backdrop 링크를 전달하기 위한 방법
+    movieBackDropSaver.textContent = `${elem["movieBackdrop"]}`;
+    movieBackDropSaver.setAttribute("class", "except"); // 보이지 않도록 설정
+
+    movieCard.appendChild(movieBackDropSaver);
+
+    const movieRelaseDate = document.createElement("date"); // 출시일자 전달하기 위한 방법
+    movieRelaseDate.textContent = `${elem["movieDate"]}`;
+    movieRelaseDate.setAttribute("class", "except"); // 보이지 않도록 설정
+
+    movieCard.appendChild(movieRelaseDate);
 
     movieCardCollection.appendChild(movieCard);
 
@@ -134,6 +143,7 @@ const handleClick = (evt) => {
     );
   });
 };
+
 // (poster) -> img : src
 // (title) -> h2 : textContent
 // (overview) -> p : textContent
