@@ -1,12 +1,13 @@
-const formSubmit = document.querySelector(".review-submit");
+const formSubmit = document.querySelector(".review-submit"); // 리뷰 폼
 const reviewInput = document.querySelector(".review-write-input"); // 리뷰 작성 input
 const reviewBox = document.querySelector(".review-box"); // 리뷰 li감싸고 있는 ul
-const reviewModalClose = document.querySelector(".delete-modal-close"); // 리뷰 모달
-const editModalClose = document.querySelector(".edit-modal-close");
-const deleteModalBtn = document.querySelector(".delete-modal-btn");
-const userbox = document.querySelector(".user-name-btn-box");
-const reviewEmpty = document.querySelector(".review-empty");
-const reviewFilterEmpty = document.querySelector(".review-filter-empty");
+const reviewModalClose = document.querySelector(".delete-modal-close"); // 삭제 모달 닫기버튼
+const editModalClose = document.querySelector(".edit-modal-close"); // 수정 모달 닫기버튼
+const deleteModalBtn = document.querySelector(".delete-modal-btn"); // 삭제 모달 삭제버튼
+const editModalBtn = document.querySelector(".edit-modal-btn"); // 수정 모달 수정버튼
+const editInput = document.querySelector(".edit-input"); // 수정 할 내용 인풋
+const editPasswordInput = document.querySelector(".edit-password-input"); // 수정시 비번입력 인풋
+const reviewFilterEmpty = document.querySelector(".review-filter-empty"); // 리뷰 없을때 문구표시
 
 // 로컬에 리뷰 있으면 가져오기
 let reviews = localStorage.getItem("reviews")
@@ -30,6 +31,24 @@ const reviewsFilter = () => {
   } else {
     reviewFilterEmpty.classList.remove("open");
   }
+};
+const currentTime = () => {
+  let today = new Date();
+
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1; // 월
+  let date = today.getDate(); // 날짜
+  let day = today.getDay(); // 요일
+
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes(); // 분
+  let seconds = today.getSeconds(); // 초
+  let milliseconds = today.getMilliseconds(); // 밀리초
+
+  let ymd = year + "-" + month + "-" + date;
+  let hms = hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
+
+  return `${ymd} ${hms}`;
 };
 
 let deleteUserTarget = [];
@@ -107,9 +126,6 @@ const editItem = (e) => {
 };
 
 //  모달창에 비밀번호 입력 시 리뷰 수정
-const editModalBtn = document.querySelector(".edit-modal-btn");
-const editInput = document.querySelector(".edit-input");
-const editPasswordInput = document.querySelector(".edit-password-input");
 editModalBtn.addEventListener("click", () => {
   editUserTarget = reviews.filter(
     (review) => review.id === parseInt(editItemId)
@@ -123,7 +139,7 @@ editModalBtn.addEventListener("click", () => {
     editAlertOpenClose("close");
   }
 
-  const editText = editInput.value; // 수정 후 리뷰 Text
+  const editText = editInput.value; // 수정 후 리뷰 Text 할당
 
   if (editText !== null) {
     targetEditItem.innerText = editText; // 수정한 리뷰로 체인지
@@ -146,14 +162,15 @@ editModalBtn.addEventListener("click", () => {
 const addItem = (review) => {
   if (review.reviewText !== "") {
     const li = document.createElement("li");
-
     li.classList.add("review-list");
 
     li.innerHTML = `
 			<div class="user-review-box">
-				<p class="user-name"><span class="user-name-sub"></span>${review.user}</p>
+			<span class="user-name-sub">${timeForToday(review.time)}</span>	
+				<p class="user-name">${review.user} </p> 
 				<p class="review-text">${review.reviewText}</p>
-			</div>
+				</div>
+			
 			<button class="delete-btn">Delete</button>
 			<button class="edit-btn">Edit</button>
 			`;
@@ -190,6 +207,7 @@ const submitHandler = (e) => {
   const userPasswordAlert = document.querySelector(".user-password-alert");
 
   const inputValue = reviewInput.value.trim();
+
   // 로그인, 리뷰, 입력 안할 시 경고문
   if (userName === "" || userPassword === "") {
     userLoginAlert.classList.add("open");
@@ -220,12 +238,15 @@ const submitHandler = (e) => {
     }
   }
 
+  let nowTime = currentTime();
+  // let nowTime = timeForToday(time);
   const review = {
     id: Date.now(),
     user: userName,
     userpass: sha256(userPassword),
     reviewText: inputValue,
     movieid: currentMovieId,
+    time: nowTime,
   };
 
   addItem(review);
@@ -316,6 +337,32 @@ const editModalOpenClose = (edit) => {
   if (edit === "close") {
     editModalConteiner.classList.remove("open");
   }
+};
+
+// 몇분전 표시
+const timeForToday = (value) => {
+  const today = new Date();
+  const timeValue = new Date(value);
+
+  const betweenTime = Math.floor(
+    (today.getTime() - timeValue.getTime()) / 1000 / 60
+  );
+  if (betweenTime < 1) return "Just now";
+  if (betweenTime < 60) {
+    return `${betweenTime}minute ago`;
+  }
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `${betweenTimeHour}hour ago`;
+  }
+
+  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}day ago`;
+  }
+
+  return `${Math.floor(betweenTimeDay / 365)}year ago`;
 };
 
 // 필터링된 리뷰가 없는 경우 리뷰없음 표시

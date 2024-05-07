@@ -152,8 +152,8 @@
 	font-weight: bold;
 }
 .user-name-sub {
-	font-size: 15px;
-	font-weight:normal;
+	float: right;
+	color: rgba(0, 0, 0, 0.5);
 }
 
 .edit-btn,
