@@ -124,11 +124,11 @@ fetch(
 
       const movieRating = document.createElement("p");
       movieRating.classList.add("movie-rating");
-      movieRating.textContent = `평점: ${voteAverage}`;
+      movieRating.textContent = `Rating: ${voteAverage}`;
 
       const movieCard = document.createElement("div");
       movieCard.setAttribute("data-movie-id", `${id}`);
-      movieCard.classList.add(".movie-card");
+      movieCard.classList.add("movie-card");
 
       movieInfo.appendChild(movieTitle);
       movieInfo.appendChild(movieOverview);
@@ -141,3 +141,4 @@ fetch(
     });
   })
   .catch((err) => console.error(err));
+
