@@ -79,6 +79,7 @@ moviePromise.then((data) => {
     movieCardTitle.setAttribute("class", "movie-collection__card__title");
     movieCardTitle.classList.add("ubuntu-bold");
     movieCardTitle.textContent = `${elem["movieTitle"]}`;
+    
 
     movieCardOverview.setAttribute("class", "movie-collection__card__overview");
     movieCardOverview.classList.add("quicksand");
@@ -89,10 +90,16 @@ moviePromise.then((data) => {
     movieCardRating.textContent = `Rating: ${elem["movieRating"]}`;
     movieCardRating.innerHTML += "<br>";
 
+    const movieID = document.createElement("id");
+    movieID.textContent = `${elem["movieID"]}`;
+    movieID.setAttribute("style", "display: none");
+
+
     movieCard.appendChild(movieCardImage); // Add img
     movieCard.appendChild(movieCardTitle); // Add h4
     movieCard.appendChild(movieCardOverview); // Add p
     movieCard.appendChild(movieCardRating); // Add span
+    movieCard.appendChild(movieID); // Add ID
 
     const movieDetailAnchor = document.createElement("a"); // 상세페이지 링크 삽입
     movieDetailAnchor.textContent = "영화 상세 정보";
