@@ -100,7 +100,7 @@ moviePromise.then((data) => {
     movieCard.appendChild(movieID); // Add ID
 
     const movieDetailAnchor = document.createElement("a"); // 상세페이지 링크 삽입
-    movieDetailAnchor.textContent = "영화 상세 정보";
+    movieDetailAnchor.textContent = "More Information";
     movieDetailAnchor.setAttribute("href", "./template/review.html");
     movieDetailAnchor.setAttribute("class", "movie-detail__info__review");
     movieDetailAnchor.classList.add("gowun-dodum-regular");
