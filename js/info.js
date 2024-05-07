@@ -134,7 +134,7 @@ fetch(
       const movieRating = document.createElement("p");
       movieRating.classList.add("movie-rating");
       movieOverview.classList.add("quicksand-light");
-      movieRating.textContent = `Rating: ${voteAverage}`;
+      movieRating.textContent = `Rating: ${Math.round(voteAverage * 100)/100}`;
 
       const movieCard = document.createElement("div");
       movieCard.setAttribute("data-movie-id", `${id}`);

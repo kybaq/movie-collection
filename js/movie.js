@@ -44,7 +44,7 @@ moviePromise.then((data) => {
         moviePoster: `${imgUrl}${elem["poster_path"]}}`,
         movieBackdrop: `${imgUrl}${elem["backdrop_path"]}}`, // backdrop_path와 release_date 를 넘겨주기 위해 display none 으로 설정하고 넘겨주기로 함
         movieOverview: `${elem["overview"]}`,
-        movieRating: `${elem["vote_average"]}`,
+        movieRating: `${Math.round(elem["vote_average"] * 100)/100}`,
         movieID: `${elem["id"]}`, // movie-collection__card 만들 때, id 추가해서 넣어주기
         movieDate: `${elem["release_date"]}`, // review.html 의 .movie-detail__info__date 에서 사용.
       };
