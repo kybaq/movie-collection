@@ -16,7 +16,7 @@ body {
     align-items: center;
 }
 
-#review_form > input{
+#review_form > #review_user > input{
     width: 20%;
     height: 20px;
 
