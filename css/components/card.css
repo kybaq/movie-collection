@@ -42,14 +42,13 @@
     word-break: break-all;
 }
 
-/* .movie-collection__card__overview {
+.movie-overview {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 9;
+    -webkit-line-clamp: 4;
     overflow: hidden;
     margin: 8px 0px;
-    line-height: 1.1em;
-} */
+}
 
 .movie-detail__info__review {
     line-height: 2em;
