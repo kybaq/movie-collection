@@ -5,6 +5,20 @@
     z-index: 1;
 }
 
+.movie-detail__info::after {
+    height: 100%;
+    width: 100%;
+    content: "";
+    background-image: url("https://image.tmdb.org/t/p/w300//kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    /* opacity: 0.3; */
+    filter: blur(20px);
+}
+
 .movie-detail__info__box {
     display: flex;
     flex-direction: column;
@@ -25,10 +39,3 @@
     margin-bottom: 30px;
 }
 
-.ibm-plex-sans-kr-regular {
-    font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  
