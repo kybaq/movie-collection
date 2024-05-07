@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(30, 30, 30);
+    background-color: rgb(30, 30, 30);
 }
 
 /* 영역 확인
@@ -8,6 +8,7 @@ body {
 } */
 
 #review_container {
+
   display: flex;
   flex-direction: column;
 
