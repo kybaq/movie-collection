@@ -1,10 +1,9 @@
 
-
 .review-wrapper * {
 	letter-spacing: 0.5px; /* 글자 간격*/
 	line-height : normal; /* 줄바꿈 간격*/
 	box-sizing: border-box;
-	font-family: "Noto Sans KR", sans-serif;
+	font-family: "Quicksand", sans-serif;
 }
 
 /* ================================== */
@@ -17,7 +16,7 @@
 	border: none;
 	border-bottom: 1px solid rgb(163, 163, 163);
 	outline: none;
-	font-size: 15px;
+	font-size: 14px;
 	padding-left: 6px;
 	padding-right: 6px;
 	padding-bottom: 6px;
@@ -40,8 +39,8 @@
 }
 .review-submit {
 	background-color: #fff;
-	margin-top: 50px;
-	width: 46%;
+	margin: 20px 20px;
+	width: 880px;
 	padding: 12px;
 	border-radius: 8px;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -92,11 +91,11 @@
 /* ================================== */
 
 .review-container {
-	margin-top: 30px;
-	margin-bottom: 30px;
+	/* margin-top: 30px;
+	margin-bottom: 30px; */
 	width: 100%;
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -105,7 +104,8 @@
 
 	border-radius: 8px;
 	list-style: none;
-	width: 46%;
+	margin: 20px 20px;
+	width: 880px;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
 	display: flex;
@@ -131,7 +131,7 @@
 .review-list {
 	padding: 14px 16px;
 	margin-bottom: 14px;
-	width: 80%;
+	width: 70%;
 	border-radius: 8px;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
@@ -139,7 +139,9 @@
 .user-review-box{
 	margin-bottom: 6px;
 }
-
+.user-name {
+	font-weight: bolder;
+}
 .user-name-btn-box {
 	display: flex;
 	justify-content: space-between;
@@ -305,8 +307,11 @@
 	color: #fff;
 	font-weight: bold;
 }
+.edit-modal-btn:hover {
+	background-color: rgb(80, 214, 67);
+}
 .delete-modal-btn:hover {
-	background-color: rgba(255, 43, 43, 0.9);
+	background-color: rgb(219, 40, 40);
 }
 
 .review-text.close {
