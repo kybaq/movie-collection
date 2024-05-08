@@ -1,0 +1,339 @@
+
+.review-wrapper * {
+	letter-spacing: 0.5px; /* 글자 간격*/
+	line-height : normal; /* 줄바꿈 간격*/
+	box-sizing: border-box;
+	font-family: "Quicksand", sans-serif;
+}
+
+/* ================================== */
+/* ========= 리뷰 작성 CSS ========== */
+/* ================================== */
+
+#username,
+#password {
+	width: 120px;
+	border: none;
+	border-bottom: 1px solid rgb(163, 163, 163);
+	outline: none;
+	font-size: 14px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	margin-left: 5px;
+}
+#password {
+	margin-left: 10px;
+}
+
+#username:focus,
+#password:focus {
+	border-color: rgb(34, 34, 34);
+}
+.review-write-container {
+	width: 100%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.review-submit {
+	background-color: #fff;
+	margin: 20px 20px;
+	width: 880px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.review-login-input-box {
+	display: flex;
+	align-items: center; /* 세로 가운데 정렬*/
+
+	width: 100%;
+	height: 40px;
+}
+
+.review-write-input-box {
+	margin: 10px 0;
+	width: 100%;
+	height: 100px;
+}
+
+.review-write-input {
+	padding: 6px;
+	width: 100%;
+	height: 100%;
+
+	outline: none;
+	resize: none; /*크기 조절 고정*/
+}
+
+.review-btn-box {
+	text-align: end;
+}
+
+.review-btn {
+	cursor: pointer;
+	padding: 8px 18px;
+	background-color: #8E9BFF;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: bold;
+}
+.review-btn:hover {
+	background-color: #5C66FF;
+}
+
+/* ================================== */
+/* ========= 리뷰 리스트 CSS ========= */
+/* ================================== */
+
+.review-container {
+	/* margin-top: 30px;
+	margin-bottom: 30px; */
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.review-box {
+	background-color: #fff;
+
+	border-radius: 8px;
+	list-style: none;
+	margin: 20px 20px;
+	width: 880px;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding-top: 14px;
+	height: 400px;
+	overflow-y: scroll; /* 세로 스크롤 사용 */
+}
+
+/* 스크롤바 */
+.review-box::-webkit-scrollbar {
+	width: 10px; 
+	/* display: none; */
+}
+/* 스크롤바 막대 꾸미기  */
+.review-box::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.review-list {
+	padding: 14px 16px;
+	margin-bottom: 14px;
+	width: 70%;
+	border-radius: 8px;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.user-review-box{
+	margin-bottom: 6px;
+}
+.user-name {
+	font-size: 17px;
+	font-weight: bolder;
+}
+.user-name-btn-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.user-name-btn-box > .user-name {
+	font-size: 16px;
+	font-weight: bold;
+}
+.user-name-sub {
+	font-size: 15px;
+	float: right;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.edit-btn,
+.delete-btn {
+	cursor: pointer;
+	padding: 4px 10px;
+	border: none;
+	color: #fff;
+	border-radius: 4px;
+}
+
+
+.delete-btn,
+.edit-btn  {
+	float: right;
+}
+
+.edit-btn {
+	background-color: #76ff6c;
+}
+.edit-btn:hover {
+	background-color: #5be751;
+}
+.delete-btn {
+	background-color: #FF5F49;
+	margin-left: 6px;
+}
+.delete-btn:hover {
+	background-color: #f03f3f;
+}
+
+.review-text {
+	font-size: 15px;
+	margin-left: 6px;
+	margin-top: 6px;
+	white-space: pre-line; /*textarea에서 줄바꿈도 출력시 사용*/
+	/* overflow-wrap:break-word; */
+}
+
+.review-filter-empty {
+	display: none;
+}
+
+.review-filter-empty.open {
+	margin-top: 30px;
+	font-size: 18px;
+	display: block;
+}
+/* ======================================== */
+/* ========= 수정, 삭제 모달창 CSS ========= */
+/* ======================================== */
+
+.review-edit-input {
+	display: none;
+}
+.review-edit-input.open {
+	display: inline;
+}
+
+.delete-modal-conteiner.open,
+.edit-modal-conteiner.open {
+	display: flex;
+}
+
+
+.delete-modal-conteiner,
+.edit-modal-conteiner {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	
+	display: none;
+	justify-content: center;
+	align-items: center;
+	
+	z-index: 99;
+}
+
+.delete-modal-input-box,
+.edit-modal-input-box {
+	background-color: white;
+
+	width: 350px;
+	height: 300px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 5px;
+
+	gap: 8px;
+}
+.edit-modal-input-box > h4,
+.delete-modal-input-box > h4 {
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+
+.delete-modal-close,
+.edit-modal-close {
+	position: absolute;
+  top: 15px;
+  right: 40px;
+  font-size: 35px;
+  font-weight: bolder;
+  color:#fff;
+  cursor:pointer;
+  z-index: 100;
+}
+
+
+.delete-modal-input,
+.edit-modal-input {
+	width: 70%;
+}
+
+.delete-modal-input > input,
+.edit-modal-input > input {
+	padding: 8px;
+	width: 100%;
+	font-size: 16px;
+	outline: none;
+
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.edit-modal-btn {
+	cursor: pointer;
+	padding: 8px 0px;
+	width: 70%;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(92, 240, 78);
+	color: #fff;
+	font-weight: bold;
+}
+.delete-modal-btn {
+	cursor: pointer;
+	padding: 8px 0px;
+	width: 70%;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(255, 43, 43);
+	color: #fff;
+	font-weight: bold;
+}
+.edit-modal-btn:hover {
+	background-color: rgb(80, 214, 67);
+}
+.delete-modal-btn:hover {
+	background-color: rgb(219, 40, 40);
+}
+
+.review-text.close {
+	display: none;
+}
+
+.delete-user-info-not-alert,
+.edit-user-info-not-alert,
+.user-login-alert,
+.review-text-alert,
+.user-password-alert {
+	display: none;
+	color: rgb(255, 43, 43);
+	margin-left: 5px;
+	font-size: 14px;
+}
+.delete-user-info-not-alert.open,
+.edit-user-info-not-alert.open,
+.user-login-alert.open,
+.review-text-alert.open,
+.user-password-alert.open {
+	display: block;
+}

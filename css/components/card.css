@@ -1,0 +1,77 @@
+.movie-collection {
+    display: grid;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+    align-content: stretch;
+    margin-left: 110px;
+}
+
+.movie-collection__card {
+    height: 530px;
+    width: 300px;
+    margin: 20px 0px;
+    border-radius: 15px;
+    box-shadow : 1px 1px 5px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px;
+}
+
+.ubuntu-bold {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.ubuntu-medium {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ubuntu-light {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+.movie-collection__card__title {
+    font-size: 24px;
+    margin: 5px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+
+.movie-overview {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    margin: 8px 0px;
+}
+
+.movie-detail__info__review {
+    line-height: 2em;
+}
+
+.quicksand {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.quicksand-medium {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+.except {
+    display: none;
+}
+
