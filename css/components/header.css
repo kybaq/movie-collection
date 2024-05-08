@@ -1,15 +1,14 @@
 .header {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
     height: 100px;
     font-size: 40px;
     color: black;
-    margin-left: 110px;
 }
 
 .header-div {
-    width: 33%;
+    width: 28%;
+    margin-left: 110px;
 }
 
 .nanum-gothic-regular {
@@ -20,7 +19,6 @@
 
 .detail-header {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
     height: 50px;
     color: white;
