@@ -158,7 +158,7 @@ fetch(
       movieAnchor.classList.add("gowun-dodum-regular");
 
       const movieCard = document.createElement("div");
-      movieCard.setAttribute("data-movie-id", `${id}`);
+      movieCard.setAttribute("id", `${id}`);
       movieCard.classList.add("movie-card");
 
       movieInfo.appendChild(movieTitle);
@@ -181,12 +181,13 @@ fetch(
 
 const handleClick = (evt) => {
   const target = evt.target;
-  // const targetId = evt.target.parentElement.id;
+  const targetId = evt.target.parentElement.parentElement.id;
   const targetImg = evt.target.parentElement.parentElement.firstChild.src;
 
   const cardData = target.parentElement.childNodes;
 
   window.sessionStorage.setItem("img", targetImg); // 유사 영화의 poster src 를 별도로 로컬에 저장
+  window.localStorage.setItem("currentMovieId", targetId);
 
   cardData.forEach((elem) => {
     window.sessionStorage.setItem(
