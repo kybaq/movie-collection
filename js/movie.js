@@ -141,7 +141,10 @@ moviePromise.then((data) => {
 // sessionstorage 통해서 저장.
 const handleClick = (evt) => {
   const target = evt.target;
+  const targetId = evt.target.parentElement.id;
   const cardData = target.parentElement.childNodes;
+
+  localStorage.setItem("currentMovieId", targetId); // id값 로컬저장
 
   cardData.forEach((elem) => {
     window.sessionStorage.setItem(
