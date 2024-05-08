@@ -44,7 +44,7 @@ moviePromise.then((data) => {
         moviePoster: `${imgUrl}${elem["poster_path"]}}`,
         movieBackdrop: `${imgUrl}${elem["backdrop_path"]}}`, // backdrop_path와 release_date 를 넘겨주기 위해 display none 으로 설정하고 넘겨주기로 함
         movieOverview: `${elem["overview"]}`,
-        movieRating: `${Math.round(elem["vote_average"] * 100)/100}`,
+        movieRating: `${Math.round(elem["vote_average"] * 100) / 100}`,
         movieID: `${elem["id"]}`, // movie-collection__card 만들 때, id 추가해서 넣어주기
         movieDate: `${elem["release_date"]}`, // review.html 의 .movie-detail__info__date 에서 사용.
       };
@@ -138,15 +138,10 @@ moviePromise.then((data) => {
 
 // const movieAnchor = document.querySelectorAll(".movie-detail__info__review");
 
-// localstorage 통해서 저장.
+// sessionstorage 통해서 저장.
 const handleClick = (evt) => {
   const target = evt.target;
-  const targetId = evt.target.parentElement.id;
-
   const cardData = target.parentElement.childNodes;
-  console.dir(cardData);
-
-  localStorage.setItem("currentMovieId", targetId); // id값 로컬저장
 
   cardData.forEach((elem) => {
     window.sessionStorage.setItem(
