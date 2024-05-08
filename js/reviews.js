@@ -77,7 +77,7 @@ deleteModalBtn.addEventListener("click", () => {
     targetDelete.remove();
     passwordDeleteInput.value = "";
     deleteAlertOpenClose("close");
-    alert("삭제가 완료되었습니다!");
+    alert("Deletion completed!");
     modalOpenClose("close");
 
     // 삭제 후 필터링된 리뷰가 없는지 확인 후 경고창 표시
@@ -137,7 +137,7 @@ editModalBtn.addEventListener("click", () => {
     }
 
     editPasswordInput.value = "";
-    alert("수정이 완료되었습니다!");
+    alert("Editing completed!");
     editModalOpenClose("close");
   }
 });
@@ -151,11 +151,12 @@ const addItem = (review) => {
 
     li.innerHTML = `
 			<div class="user-review-box">
-				<p class="user-name">${review.user}<span class="user-name-sub"> 님의 리뷰</span></p>
+			<span class="user-name-sub">${timeForToday(review.time)}</span>
+				<p class="user-name">${review.user}</p>
 				<p class="review-text">${review.reviewText}</p>
 			</div>
-			<button class="delete-btn">삭제</button>
-			<button class="edit-btn">수정</button>
+			<button class="delete-btn">Delete</button>
+			<button class="edit-btn">Edit</button>
 			`;
 
     // 새로운 리뷰의 위치를 결정하기 위해 이전 리뷰들과의 비교
@@ -219,6 +220,8 @@ const submitHandler = (e) => {
       userPasswordAlert.classList.remove("open");
     }
   }
+  // 현재 날짜 및 시간 할당
+  const currTime = currentTime();
 
   const review = {
     id: Date.now(),
@@ -226,6 +229,7 @@ const submitHandler = (e) => {
     userpass: sha256(userPassword),
     reviewText: inputValue,
     movieid: currentMovieId,
+    time: currTime,
   };
 
   addItem(review);
@@ -234,7 +238,7 @@ const submitHandler = (e) => {
 
   reviewInput.value = "";
   reviewInput.focus();
-  alert("리뷰 등록이 완료되었습니다!");
+  alert("Review completed!");
 
   // 새 리뷰가 추가되면 필터링된 리뷰가 있는지 확인 후 경고창 표시 및 제거
   reviewsFilter();
@@ -255,9 +259,6 @@ const drawReviewList = () => {
     });
 
     reviews = userReviews;
-
-    // 필터링된 리뷰가 없는 경우 경고창 표시
-    reviewsFilter();
   }
 };
 
@@ -321,6 +322,55 @@ const editModalOpenClose = (edit) => {
   }
 };
 
+// 현재 날짜 및 시간
+const currentTime = () => {
+  const today = new Date();
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1; // 월
+  let date = today.getDate(); // 날짜
+  let day = today.getDay(); // 요일
+
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes(); // 분
+  let seconds = today.getSeconds(); // 초
+  let milliseconds = today.getMilliseconds(); // 밀리초
+
+  let ymd = year + "-" + month + "-" + date;
+  let hms = hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
+
+  return `${ymd} ${hms}`;
+};
+
+// 시간(몇 분 전)
+const timeForToday = (value) => {
+  const today = new Date();
+  const timeValue = new Date(value);
+
+  const betweenTime = Math.floor(
+    (today.getTime() - timeValue.getTime()) / 1000 / 60
+  );
+  if (betweenTime < 1) return "Just now";
+  if (betweenTime < 60) {
+    return `${betweenTime}minute ago`;
+  }
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `${betweenTimeHour}hour ago`;
+  }
+
+  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}day ago`;
+  }
+
+  return `${Math.floor(betweenTimeDay / 365)}year ago`;
+};
+
+// 필터링된 리뷰가 없는 경우 리뷰없음 표시
+reviewsFilter();
+
+// 리뷰 출력
 drawReviewList();
 
 formSubmit.addEventListener("submit", submitHandler);

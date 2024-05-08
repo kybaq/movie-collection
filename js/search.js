@@ -8,7 +8,7 @@ const handleSubmit = (evt) => {
   if (searchValue.length >= 2) {
     printSearchResult(searchValue);
   } else {
-    alert("2글자 이상 검색해주세요");
+    alert("Please Write loger than 2 alphabet.");
   }
 };
 

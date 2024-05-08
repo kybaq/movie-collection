@@ -102,13 +102,20 @@ fetch(
 
     movieData2.forEach((element) => {
       const img = element["poster_path"];
-      const title = element["original_title"];
+      const title = element["title"];
       const overview = element["overview"];
       const voteAverage = element["vote_average"];
       const id = element["id"];
 
       let moviePoster = document.createElement("img");
-      moviePoster.setAttribute("src", `https://image.tmdb.org/t/p/w400${img}`);
+      if (img === null) {
+        moviePoster.setAttribute("src", "../image/No_Image_Available.jpg");
+      } else {
+        moviePoster.setAttribute(
+          "src",
+          `https://image.tmdb.org/t/p/w400${img}`
+        );
+      }
       moviePoster.classList.add("movie-poster");
 
       const movieInfo = document.createElement("div");
@@ -116,19 +123,22 @@ fetch(
 
       const movieTitle = document.createElement("h3");
       movieTitle.classList.add("movie-title");
+      movieTitle.classList.add("ubuntu-bold");
       movieTitle.textContent = title;
 
       const movieOverview = document.createElement("p");
       movieOverview.classList.add("movie-overview");
+      movieOverview.classList.add("quicksand-medium");
       movieOverview.textContent = overview;
 
       const movieRating = document.createElement("p");
       movieRating.classList.add("movie-rating");
-      movieRating.textContent = `평점: ${voteAverage}`;
+      movieOverview.classList.add("quicksand-light");
+      movieRating.textContent = `Rating: ${Math.round(voteAverage * 100)/100}`;
 
       const movieCard = document.createElement("div");
       movieCard.setAttribute("data-movie-id", `${id}`);
-      movieCard.classList.add(".movie-card");
+      movieCard.classList.add("movie-card");
 
       movieInfo.appendChild(movieTitle);
       movieInfo.appendChild(movieOverview);
