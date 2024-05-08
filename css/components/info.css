@@ -5,6 +5,10 @@
     z-index: 1;
 }
 
+.movie-detail__info img {
+    width: 300px
+}
+
 .movie-detail__info__box {
     display: flex;
     flex-direction: column;
