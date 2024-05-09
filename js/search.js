@@ -8,7 +8,7 @@ const handleSubmit = (evt) => {
   if (searchValue.length >= 2) {
     printSearchResult(searchValue);
   } else {
-    alert("Please Write loger than 2 alphabet.");
+    alert("Please Write longer than 2 alphabet.");
   }
 };
 
